@@ -10,7 +10,15 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata = {
   title: "AI Recipes Plateform",
-  description: 'AI-powered recipe platform built with Next.js, React, Tailwind CSS, Shadcn UI, Strapi, and Neon DB. Generate smart recipes based on ingredients, explore meals with advanced search, and manage content via a CMS. Fast, responsive, and scalable full-stack app for modern food experiences.'
+  description: 'AI-powered recipe platform built with Next.js, React, Tailwind CSS, Shadcn UI, Strapi, and Neon DB. Generate smart recipes based on ingredients, explore meals with advanced search, and manage content via a CMS. Fast, responsive, and scalable full-stack app for modern food experiences.',
+  icons: {
+    icon: [
+      { url: "/logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.png", sizes: "48x48", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({
