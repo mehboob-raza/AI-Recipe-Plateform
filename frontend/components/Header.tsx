@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Cookie, Refrigerator } from 'lucide-react'
 import UserDropdown from './UserDropdown'
 import {checkUser} from '@/lib/checkUser'
+import PricingModal from './PricingModal'
 
 const Header = async () => {
   const user = await checkUser()
@@ -36,6 +37,9 @@ const Header = async () => {
         <div className='flex items-center justify-between'>
 
           <Show when="signed-in" >
+            {
+              user && <PricingModal > </PricingModal>
+            }
             <UserDropdown />
           </Show>
           <Show when="signed-out" >

@@ -1,6 +1,6 @@
 import { currentUser } from '@clerk/nextjs/server'
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL 
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN
 export const checkUser = async () => {
 
@@ -20,12 +20,14 @@ export const checkUser = async () => {
 
     //check if user exist in strapi or not
     try {
-        const existingUserResponse = await fetch(`${STRAPI_URL}/api/filters[clerkId][$eq]=${user.id}`, {
+        const query = new URLSearchParams({ 'filters[clerkId][$eq]': user.id }).toString()
+        const existingUserResponse = await fetch(`${STRAPI_URL}/api/users?${query}`, {
             headers: {
                 Authorization: `Bearer ${STRAPI_API_TOKEN}`
             },
             cache: 'no-store'
         })
+        console.log('existingUserResponse', existingUserResponse);
 
         if (!existingUserResponse.ok) {
             const errorText = await existingUserResponse.text()
@@ -35,8 +37,9 @@ export const checkUser = async () => {
 
         const existingUserData = await existingUserResponse.json()
 
-        if (existingUserData.length > 0) {
-            const existingUser = existingUserData[0]
+        const existingUsers = existingUserData
+        if (existingUsers.length > 0) {
+            const existingUser = existingUsers[0]
 
             if (existingUser.subscriptionTier !== subscriptionTier) {
                 await fetch(`${STRAPI_URL}/api/users/${existingUser.id}`, {
@@ -51,8 +54,8 @@ export const checkUser = async () => {
             return { ...existingUser, subscriptionTier }
         }
 
-        // create new user in strapi 
-        const rolesResponse = await fetch(`${STRAPI_URL}/api/user-permissions/roles`, {
+        // create new user in strapi
+        const rolesResponse = await fetch(`${STRAPI_URL}/api/users-permissions/roles`, {
             headers: {
                 Authorization: `Bearer ${STRAPI_API_TOKEN}`,
             }
