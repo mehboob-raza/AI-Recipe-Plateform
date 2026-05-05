@@ -77,15 +77,15 @@
     "lastName": {
       "type": "string"
     },
-    "imageUrl": {
-      "type": "string"
-    },
-    "subscriptioTier": {
+    "subscriptionTier": {
       "type": "enumeration",
       "enum": [
         "free",
         "pro"
       ]
+    },
+    "imageUrl": {
+      "type": "string"
     },
     "recipes": {
       "type": "relation",

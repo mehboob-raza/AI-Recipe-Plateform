@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button"
+import { PricingTable } from "@clerk/nextjs";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <Button variant='primary'>
-        Home
-      </Button>
+    <div className="min-h-screen bg-stone-50 text-stone-900">
+      <section className="pt-32 pb-20 px-4">
+        
+        <PricingTable />
+      </section>
     </div>
   );
 }
