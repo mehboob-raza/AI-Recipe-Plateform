@@ -79,6 +79,7 @@
     },
     "subscriptionTier": {
       "type": "enumeration",
+      "default": "free",
       "enum": [
         "free",
         "pro"

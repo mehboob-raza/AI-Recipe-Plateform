@@ -1110,7 +1110,8 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    subscriptionTier: Schema.Attribute.Enumeration<['free', 'pro']>;
+    subscriptionTier: Schema.Attribute.Enumeration<['free', 'pro']> &
+      Schema.Attribute.DefaultTo<'free'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
