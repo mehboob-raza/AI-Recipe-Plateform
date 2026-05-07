@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { neobrutalism } from '@clerk/ui/themes'
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -39,6 +40,7 @@ export default function RootLayout({
           <main className="min-h-screen">
             {children}
           </main>
+          <Toaster richColors />
           <footer className="py-6 px-4 border-t">
             <div className="max-w-6xl mx-auto flex justify-center">
               <p className="text-stone-500 text-sm capitalize">

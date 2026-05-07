@@ -12,10 +12,9 @@ import { Badge } from './ui/badge'
 const Header = async () => {
   const user = await checkUser()
 
-  console.log('user', user);
 
   return (
-    <header className="fixed top-0 w-full border-b border-stone-200 bg-stone-50/80 backdrop-blur-md supports-backdrop-filter:bg-stone-50">
+    <header className="fixed top-0 w-full border-b border-stone-200 bg-stone-50/80 backdrop-blur-md supports-backdrop-filter:bg-stone-50 z-10">
       <nav className='container mx-auto px-4 h-16 flex items-center justify-between'>
         <Link href={user ? '/dashboard' : '/'}>
           <Image src='/logo.png' alt='ai recipe logo' width={60} height={60} className='w-16' />

@@ -40,7 +40,7 @@ export const checkUser = async () => {
         const existingUserData = await existingUserResponse.json()
 
         const existingUsers = existingUserData
-        if (existingUsers.length > 0) {
+        if (existingUsers?.length > 0) {
             const existingUser = existingUsers[0]
 
             if (existingUser.subscriptionTier !== subscriptionTier) {
@@ -93,7 +93,7 @@ export const checkUser = async () => {
             },
             body: JSON.stringify(userData)
         })
-        if (!newUserResponse.ok) {
+        if (!newUserResponse?.ok) {
             const errorText = await newUserResponse.text()
             console.error('Strapi Error response', errorText);
             return null
