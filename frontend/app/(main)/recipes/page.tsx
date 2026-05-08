@@ -5,8 +5,8 @@ import { Bookmark, Loader2, ChefHat } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import useFetch from "@/hooks/use-fetch";
-import { getSavedRecipes } from "@/actions/recipe.actions";
 import RecipeCard from "@/components/RecipeCard";
+import { getSavedRecipes } from '@/actions/recipe.actions';
 
 export default function SavedRecipesPage() {
     const {
