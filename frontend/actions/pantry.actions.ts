@@ -60,25 +60,25 @@ export async function scanPantryImage(formData) {
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
         const prompt = `
-You are a professional chef and ingredient recognition expert. Analyze this image of a pantry/fridge and identify all visible food ingredients.
+            You are a professional chef and ingredient recognition expert. Analyze this image of a pantry/fridge and identify all visible food ingredients.
 
-Return ONLY a valid JSON array with this exact structure (no markdown, no explanations):
-[
-  {
-    "name": "ingredient name",
-    "quantity": "estimated quantity with unit",
-    "confidence": 0.95
-  }
-]
+            Return ONLY a valid JSON array with this exact structure (no markdown, no explanations):
+            [
+            {
+                "name": "ingredient name",
+                "quantity": "estimated quantity with unit",
+                "confidence": 0.95
+            }
+            ]
 
-Rules:
-- Only identify food ingredients (not containers, utensils, or packaging)
-- Be specific (e.g., "Cheddar Cheese" not just "Cheese")
-- Estimate realistic quantities (e.g., "3 eggs", "1 cup milk", "2 tomatoes")
-- Confidence should be 0.7-1.0 (omit items below 0.7)
-- Maximum 20 items
-- Common pantry staples are acceptable (salt, pepper, oil)
-`;
+            Rules:
+            - Only identify food ingredients (not containers, utensils, or packaging)
+            - Be specific (e.g., "Cheddar Cheese" not just "Cheese")
+            - Estimate realistic quantities (e.g., "3 eggs", "1 cup milk", "2 tomatoes")
+            - Confidence should be 0.7-1.0 (omit items below 0.7)
+            - Maximum 20 items
+            - Common pantry staples are acceptable (salt, pepper, oil)
+            `;
 
         const result = await model.generateContent([
             prompt,

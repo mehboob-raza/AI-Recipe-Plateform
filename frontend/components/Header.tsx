@@ -3,7 +3,7 @@ import React from 'react'
 import { Button } from './ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Cookie, Refrigerator, Sparkles } from 'lucide-react'
+import { Cookie, CookingPot, Home, Refrigerator, Sparkles } from 'lucide-react'
 import UserDropdown from './UserDropdown'
 import { checkUser } from '@/lib/checkUser'
 import PricingModal from './PricingModal'
@@ -20,6 +20,12 @@ const Header = async () => {
           <Image src='/logo.png' alt='ai recipe logo' width={60} height={60} className='w-16' />
         </Link>
         <div className='hidden md:flex items-center space-x-8 text-sm font-medium text-stone-600 '>
+          <Link href='/dashboard'
+            className='hover:text-orange-600 transition flex gap-1.5 items-center'
+          >
+            <CookingPot className='w-4 h-4' />
+            Fresh Recipes
+          </Link>
           <Link href='/recipes'
             className='hover:text-orange-600 transition flex gap-1.5 items-center'
           >

@@ -132,196 +132,286 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
 
     return (
         <Dialog open={isOpen} onOpenChange={handleClose}>
-            <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto rounded-none">
-                <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold tracking-tight">
-                        Add to Pantry
-                    </DialogTitle>
-                    <DialogDescription>
-                        Scan your pantry with AI or add items manually
-                    </DialogDescription>
-                </DialogHeader>
+            <DialogContent
+                className="
+            w-[95vw]
+            sm:max-w-2xl
+            lg:max-w-3xl
+            max-h-[95dvh]
+            p-0
+            gap-0
+            overflow-hidden
+            rounded-xl
+        "
+            >
+                <div className="flex flex-col h-full max-h-[95dvh] ">
+                    {/* Header */}
+                    <DialogHeader className="px-4 sm:px-6 py-4 border-b shrink-0">
+                        <DialogTitle className="text-xl sm:text-2xl font-bold tracking-tight">
+                            Add to Pantry
+                        </DialogTitle>
 
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
-                    <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="scan" className="gap-2">
-                            <Camera className="w-4 h-4" />
-                            AI Scan
-                        </TabsTrigger>
-                        <TabsTrigger value="manual" className="gap-2">
-                            <Plus className="w-4 h-4" />
-                            Add Manually
-                        </TabsTrigger>
-                    </TabsList>
+                        <DialogDescription className="text-sm sm:text-base">
+                            Scan your pantry with AI or add items manually
+                        </DialogDescription>
+                    </DialogHeader>
 
-                    {/* AI Scan Tab */}
-                    <TabsContent value="scan" className="space-y-6 mt-6">
-                        {scannedIngredients.length === 0 ? (
-                            // Step 1: Upload & Scan
-                            <div className="space-y-4">
-                                <ImageUploader
-                                    onImageSelect={handleImageSelect}
-                                    loading={scanning}
-                                />
+                    {/* Scrollable Content */}
+                    <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4">
+                        <Tabs
+                            value={activeTab}
+                            onValueChange={setActiveTab}
+                            className="w-full flex flex-col"
+                        >
+                            <TabsList className="grid w-full grid-cols-2 h-11">
+                                <TabsTrigger value="scan" className="gap-2
+                                            rounded-lg
+                                            text-stone-600
+                                            transition-all
+                                            data-[state=active]:bg-white
+                                            data-[state=active]:text-orange-600
+                                            data-[state=active]:shadow-sm
+                                ">
+                                    <Camera className="w-4 h-4" />
+                                    AI Scan
+                                </TabsTrigger>
 
-                                {selectedImage && !scanning && (
+                                <TabsTrigger value="manual" className=" gap-2
+                                            rounded-lg
+                                            text-stone-600
+                                            transition-all
+                                            data-[state=active]:bg-white
+                                            data-[state=active]:text-orange-600
+                                            data-[state=active]:shadow-sm">
+                                    <Plus className="w-4 h-4" />
+                                    Add Manually
+                                </TabsTrigger>
+                            </TabsList>
+
+                            {/* AI Scan Tab */}
+                            <TabsContent value="scan" className="space-y-2 mt-4">
+                                {scannedIngredients.length === 0 ? (
+                                    <div className="space-y-4">
+                                        <ImageUploader
+                                            onImageSelect={handleImageSelect}
+                                            loading={scanning}
+                                        />
+
+                                        {selectedImage && (
+                                            <Button
+                                                onClick={handleScan}
+                                                className="w-full bg-orange-600 cursor-pointer hover:bg-orange-700 text-white h-11 sm:h-12"
+                                                disabled={scanning}
+                                            >
+                                                {scanning ? (
+                                                    <>
+                                                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                                                        Analyzing...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Camera className="w-5 h-5 mr-2" />
+                                                        Scan Image
+                                                    </>
+                                                )}
+                                            </Button>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className="space-y-4">
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                            <div>
+                                                <h3 className="text-lg font-bold text-stone-900">
+                                                    Review Detected Items
+                                                </h3>
+
+                                                <p className="text-sm text-stone-600">
+                                                    Found {scannedIngredients.length} ingredients
+                                                </p>
+                                            </div>
+
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => {
+                                                    setScannedIngredients([]);
+                                                    setSelectedImage(null);
+                                                }}
+                                                className="gap-2 w-full sm:w-auto cursor-pointer"
+                                            >
+                                                <Camera className="w-4 h-4" />
+                                                Scan Again
+                                            </Button>
+                                        </div>
+
+                                        {/* Ingredients */}
+                                        <div className="space-y-3">
+                                            {scannedIngredients.map((ingredient, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="
+                                                flex items-start gap-3
+                                                p-3 sm:p-4
+                                                bg-stone-50
+                                                rounded-xl
+                                                border border-stone-200
+                                            "
+                                                >
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="font-medium text-stone-900 break-words">
+                                                            {ingredient.name}
+                                                        </div>
+
+                                                        <div className="text-sm text-stone-500 break-words">
+                                                            {ingredient.quantity}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex items-center gap-2 shrink-0">
+                                                        {ingredient.confidence && (
+                                                            <Badge
+                                                                variant="outline"
+                                                                className="text-xs text-green-700 border-green-200"
+                                                            >
+                                                                {Math.round(
+                                                                    ingredient.confidence * 100
+                                                                )}
+                                                                %
+                                                            </Badge>
+                                                        )}
+
+                                                        <Button
+                                                            size="icon"
+                                                            variant="ghost"
+                                                            onClick={() =>
+                                                                removeIngredient(index)
+                                                            }
+                                                            className="text-stone-600  hover:text-red-600 cursor-pointer"
+                                                        >
+                                                            <X className="w-4 h-4" />
+                                                        </Button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <Button
+                                            onClick={handleSaveScanned}
+                                            disabled={
+                                                saving ||
+                                                scannedIngredients.length === 0
+                                            }
+                                            className="
+                                        w-full
+                                        bg-green-600
+                                        hover:bg-green-700
+                                        text-white cursor-pointer
+                                        h-11 sm:h-12
+                                    "
+                                        >
+                                            {saving ? (
+                                                <>
+                                                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                                                    Saving...
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Check className="w-5 h-5 mr-2" />
+                                                    Save {scannedIngredients.length} Items
+                                                </>
+                                            )}
+                                        </Button>
+                                    </div>
+                                )}
+                            </TabsContent>
+
+                            {/* Manual Tab */}
+                            <TabsContent value="manual" className="mt-4">
+                                <form onSubmit={handleAddManual} className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-stone-700 mb-2">
+                                            Ingredient Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            value={manualItem.name}
+                                            onChange={(e) =>
+                                                setManualItem({
+                                                    ...manualItem,
+                                                    name: e.target.value,
+                                                })
+                                            }
+                                            placeholder="e.g., Chicken breast"
+                                            className="
+                                        w-full
+                                        px-4 py-3
+                                        border border-stone-200
+                                        rounded-xl
+                                        focus:outline-none
+                                        focus:ring-2
+                                        focus:ring-orange-500
+                                    "
+                                            disabled={adding}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-stone-700 mb-2">
+                                            Quantity
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            value={manualItem.quantity}
+                                            onChange={(e) =>
+                                                setManualItem({
+                                                    ...manualItem,
+                                                    quantity: e.target.value,
+                                                })
+                                            }
+                                            placeholder="e.g., 500g, 2 cups"
+                                            className="
+                                        w-full
+                                        px-4 py-3
+                                        border border-stone-200
+                                        rounded-xl
+                                        focus:outline-none
+                                        focus:ring-2
+                                        focus:ring-orange-500
+                                    "
+                                            disabled={adding}
+                                        />
+                                    </div>
+
                                     <Button
-                                        onClick={handleScan}
-                                        className="w-full bg-orange-600 hover:bg-orange-700 text-white h-12 text-lg"
-                                        disabled={scanning}
+                                        type="submit"
+                                        disabled={adding}
+                                        className="
+                                    w-full
+                                    bg-orange-600
+                                    hover:bg-orange-700
+                                    text-white
+                                    h-11 sm:h-12 cursor-pointer
+                                "
                                     >
-                                        {scanning ? (
+                                        {adding ? (
                                             <>
                                                 <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                                                Analyzing...
+                                                Adding...
                                             </>
                                         ) : (
                                             <>
-                                                <Camera className="w-5 h-5 mr-2" />
-                                                Scan Image
+                                                <Plus className="w-5 h-5 mr-2" />
+                                                Add Item
                                             </>
                                         )}
                                     </Button>
-                                )}
-                            </div>
-                        ) : (
-                            // Step 2: Review & Save
-                            <div className="space-y-4">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <h3 className="text-lg font-bold text-stone-900">
-                                            Review Detected Items
-                                        </h3>
-                                        <p className="text-sm text-stone-600">
-                                            Found {scannedIngredients.length} ingredients
-                                        </p>
-                                    </div>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => {
-                                            setScannedIngredients([]);
-                                            setSelectedImage(null);
-                                        }}
-                                        className="gap-2"
-                                    >
-                                        <Camera className="w-4 h-4" />
-                                        Scan Again
-                                    </Button>
-                                </div>
-
-                                {/* Ingredients List */}
-                                <div className="space-y-3 max-h-96 overflow-y-auto">
-                                    {scannedIngredients.map((ingredient, index) => (
-                                        <div
-                                            key={index}
-                                            className="flex items-center gap-3 p-4 bg-stone-50 rounded-xl border border-stone-200"
-                                        >
-                                            <div className="flex-1">
-                                                <div className="font-medium text-stone-900">
-                                                    {ingredient.name}
-                                                </div>
-                                                <div className="text-sm text-stone-500">
-                                                    {ingredient.quantity}
-                                                </div>
-                                            </div>
-                                            {ingredient.confidence && (
-                                                <Badge
-                                                    variant="outline"
-                                                    className="text-xs text-green-700 border-green-200"
-                                                >
-                                                    {Math.round(ingredient.confidence * 100)}%
-                                                </Badge>
-                                            )}
-                                            <Button
-                                                size="sm"
-                                                variant="ghost"
-                                                onClick={() => removeIngredient(index)}
-                                                className="text-stone-600 hover:text-red-600"
-                                            >
-                                                <X className="w-4 h-4" />
-                                            </Button>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Save Button */}
-                                <Button
-                                    onClick={handleSaveScanned}
-                                    disabled={saving || scannedIngredients.length === 0}
-                                    className="flex-1 bg-green-600 hover:bg-green-700 text-white h-12 w-full"
-                                >
-                                    {saving ? (
-                                        <>
-                                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                                            Saving...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Check className="w-5 h-5 mr-2" />
-                                            Save {scannedIngredients.length} Items to Pantry
-                                        </>
-                                    )}
-                                </Button>
-                            </div>
-                        )}
-                    </TabsContent>
-
-                    {/* Manual Add Tab */}
-                    <TabsContent value="manual" className="mt-6">
-                        <form onSubmit={handleAddManual} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-stone-700 mb-2">
-                                    Ingredient Name
-                                </label>
-                                <input
-                                    type="text"
-                                    value={manualItem.name}
-                                    onChange={(e) =>
-                                        setManualItem({ ...manualItem, name: e.target.value })
-                                    }
-                                    placeholder="e.g., Chicken breast"
-                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                    disabled={adding}
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-stone-700 mb-2">
-                                    Quantity
-                                </label>
-                                <input
-                                    type="text"
-                                    value={manualItem.quantity}
-                                    onChange={(e) =>
-                                        setManualItem({ ...manualItem, quantity: e.target.value })
-                                    }
-                                    placeholder="e.g., 500g, 2 cups, 3 pieces"
-                                    className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                    disabled={adding}
-                                />
-                            </div>
-
-                            <Button
-                                type="submit"
-                                disabled={adding}
-                                className="flex-1 bg-orange-600 hover:bg-orange-700 text-white h-12 w-full"
-                            >
-                                {adding ? (
-                                    <>
-                                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                                        Adding...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Plus className="w-5 h-5 mr-2" />
-                                        Add Item
-                                    </>
-                                )}
-                            </Button>
-                        </form>
-                    </TabsContent>
-                </Tabs>
+                                </form>
+                            </TabsContent>
+                        </Tabs>
+                    </div>
+                </div>
             </DialogContent>
         </Dialog>
     );
