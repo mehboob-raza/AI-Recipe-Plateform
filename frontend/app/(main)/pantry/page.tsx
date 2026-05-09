@@ -119,7 +119,7 @@ export default function PantryPage() {
     };
 
     return (
-        <div className="min-h-screen bg-stone-50 pt-24 pb-16 px-4">
+        <div className="min-h-screen bg-stone-50 pt-24 pb-16 px-4 w-full">
             <div className="container mx-auto max-w-5xl">
                 {/* Header */}
                 <div className="mb-4">
@@ -139,7 +139,7 @@ export default function PantryPage() {
                         {/* Add to Pantry Button - Desktop */}
                         <Button
                             onClick={() => setIsModalOpen(true)}
-                            className="hidden md:flex bg-orange-600 hover:bg-orange-700 text-white gap-2"
+                            className="hidden md:flex bg-orange-600 hover:bg-orange-700 text-white gap-2 cursor-pointer"
                             size="lg"
                         >
                             <Plus className="w-5 h-5" />
@@ -150,7 +150,7 @@ export default function PantryPage() {
                     {/* Add to Pantry Button - Mobile (Full Width) */}
                     <Button
                         onClick={() => setIsModalOpen(true)}
-                        className="md:hidden w-full bg-orange-600 hover:bg-orange-700 text-white gap-2 mb-4"
+                        className="md:hidden w-full bg-orange-600 hover:bg-orange-700 text-white gap-2 mb-4 cursor-pointer"
                         size="lg"
                     >
                         <Plus className="w-5 h-5" />
@@ -267,7 +267,7 @@ export default function PantryPage() {
                                                     size="sm"
                                                     onClick={saveEdit}
                                                     disabled={updating}
-                                                    className="flex-1 bg-green-600 hover:bg-green-700 border-2 border-green-700"
+                                                    className="flex-1 bg-green-600 hover:bg-green-700 border-2 border-green-700 cursor-pointer"
                                                 >
                                                     {updating ? (
                                                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -280,7 +280,7 @@ export default function PantryPage() {
                                                     variant="outline"
                                                     onClick={cancelEdit}
                                                     disabled={updating}
-                                                    className="flex-1 border-2 border-stone-900 hover:bg-stone-900 hover:text-white"
+                                                    className="flex-1 border-2 border-stone-900 hover:bg-stone-900 hover:text-white cursor-pointer"
                                                 >
                                                     <X className="w-4 h-4" />
                                                 </Button>
@@ -301,14 +301,14 @@ export default function PantryPage() {
                                                 <div className="flex gap-1">
                                                     <button
                                                         onClick={() => startEdit(item)}
-                                                        className="p-2 border-2 border-transparent hover:border-orange-600 hover:bg-orange-50 transition-all text-stone-600 hover:text-orange-600"
+                                                        className="p-2 border-2 border-transparent hover:border-orange-600 hover:bg-orange-50 transition-all text-stone-600 hover:text-orange-600 cursor-pointer"
                                                     >
                                                         <Edit2 className="w-4 h-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => handleDelete(item.documentId)}
                                                         disabled={deleting}
-                                                        className="p-2 border-2 border-transparent hover:border-red-600 hover:bg-red-50 transition-all text-stone-600 hover:text-red-600"
+                                                        className="p-2 border-2 border-transparent hover:border-red-600 hover:bg-red-50 transition-all text-stone-600 hover:text-red-600 cursor-pointer"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </button>
@@ -341,7 +341,7 @@ export default function PantryPage() {
                         </p>
                         <Button
                             onClick={() => setIsModalOpen(true)}
-                            className="bg-orange-600 hover:bg-orange-700 text-white gap-2"
+                            className="bg-orange-600 hover:bg-orange-700 text-white gap-2 cursor-pointer"
                             size="lg"
                         >
                             <Plus className="w-5 h-5" />

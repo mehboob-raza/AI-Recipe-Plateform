@@ -17,7 +17,7 @@ export default async function DashboardPage() {
     const categoriesData = await getCategories();
     const areasData = await getAreas();
 
-    const recipeOfTheDay = recipeData?.recipe;
+    const recipeOfTheDay = recipeData?.recipe[0];
     const categories = categoriesData?.categories || [];
     const areas = areasData?.areas || [];
 
@@ -57,7 +57,7 @@ export default async function DashboardPage() {
 
                         <Link
                             href={`/recipe?cook=${encodeURIComponent(
-                                recipeOfTheDay.strMeal
+                                recipeOfTheDay?.strMeal
                             )}`}
                         >
                             <div className="relative bg-white border-2 border-stone-900 overflow-hidden hover:border-orange-600 hover:shadow-lg transition-all duration-300 group cursor-pointer">
@@ -65,8 +65,8 @@ export default async function DashboardPage() {
                                     {/* Image */}
                                     <div className="relative aspect-4/3 md:aspect-auto border-b-2 md:border-b-0 md:border-r-2 border-stone-900">
                                         <Image
-                                            src={recipeOfTheDay.strMealThumb}
-                                            alt={recipeOfTheDay.strMeal}
+                                            src={recipeOfTheDay?.strMealThumb}
+                                            alt={recipeOfTheDay?.strMeal}
                                             fill
                                             className="object-cover"
                                         />
