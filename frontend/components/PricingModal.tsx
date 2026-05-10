@@ -12,19 +12,22 @@ import {
 import PricingSection from './PricingSection'
 
 
-const PricingModal = ({subscriptionTier='free', children }) => {
+const PricingModal = ({ subscriptionTier = 'free', children }) => {
   console.log('children', children);
-  
+
   const [isOpen, setIsOpen] = useState(false)
 
   const canOpen = subscriptionTier === 'free'
   return (
     <div>
       <Dialog open={isOpen} onOpenChange={canOpen ? setIsOpen : undefined}>
-        <DialogTrigger>{children}</DialogTrigger>
+        <DialogTrigger>
+          {children}
+
+        </DialogTrigger>
         <DialogContent className='p-8 pt-4 sm:max-w-4xl'>
-            <DialogTitle />
-            <PricingSection />
+          <DialogTitle />
+          <PricingSection />
         </DialogContent>
       </Dialog>
     </div>
