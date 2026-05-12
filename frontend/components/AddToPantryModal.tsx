@@ -50,7 +50,7 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess } : any) {
     } = useFetch(addPantryItemManually);
 
     // Handle image selection
-    const handleImageSelect = (file) => {
+    const handleImageSelect = (file : any) => {
         setSelectedImage(file);
         setScannedIngredients([]); // Reset when new image selected
     };
@@ -102,7 +102,7 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess } : any) {
     }, [saveData]);
 
     // Handle manual add
-    const handleAddManual = async (e) => {
+    const handleAddManual = async (e : any) => {
         e.preventDefault();
         if (!manualItem.name.trim() || !manualItem.quantity.trim()) {
             toast.error("Please fill in all fields");
