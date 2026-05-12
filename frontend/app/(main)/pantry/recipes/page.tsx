@@ -25,14 +25,12 @@ export default function PantryRecipesPage() {
     fn: fetchSuggestions,
   } = useFetch(getRecipesByPantryIngredients);
 
-  console.log(recipesData);
-
   // Load suggestions on mount
   useEffect(() => {
     fetchSuggestions();
   }, []);
 
-  const recipes = recipesData?.recipes || [];
+  const recipes  = recipesData?.recipes || [];
   const ingredientsUsed = recipesData?.ingredientsUsed || "";
 
   return (
@@ -82,7 +80,7 @@ export default function PantryRecipesPage() {
             <div className="bg-orange-50 p-4 border-2 border-orange-200 inline-flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-orange-600" />
               <div className="text-sm">
-                {recipesData.recommendationsLimit === "unlimited" ? (
+                {recipesData?.recommendationsLimit === "unlimited" ? (
                   <>
                     <span className="font-bold text-green-600">∞</span>
                     <span className="text-orange-700 font-light">
@@ -132,7 +130,7 @@ export default function PantryRecipesPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {recipes.map((recipe, index) => (
+              {recipes.map((recipe : any, index  : number) => (
                 <RecipeCard key={index} recipe={recipe} variant="pantry" />
               ))}
             </div>

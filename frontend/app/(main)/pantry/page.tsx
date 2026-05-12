@@ -83,14 +83,14 @@ export default function PantryPage() {
     }, [updateData]);
 
     // Handle delete
-    const handleDelete = async (itemId) => {
+    const handleDelete = async (itemId : any) => {
         const formData = new FormData();
         formData.append("itemId", itemId);
         await deleteItem(formData);
     };
 
     // Start editing
-    const startEdit = (item) => {
+    const startEdit = (item : any) => {
         setEditingId(item.documentId);
         setEditValues({
             name: item.name,
@@ -233,7 +233,7 @@ export default function PantryPage() {
                         </div>
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {items.map((item) => (
+                            {items?.map((item : any) => (
                                 <div
                                     key={item.documentId}
                                     className="bg-white p-5 border-2 border-stone-200 hover:border-orange-600 hover:shadow-lg transition-all"

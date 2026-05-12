@@ -48,7 +48,7 @@ export default function SavedRecipesPage() {
                 {/* Recipes Grid */}
                 {!loading && recipes.length > 0 && (
                     <div className="grid md:grid-cols-2 gap-6">
-                        {recipes.map((recipe) => (
+                        {recipes.map((recipe : any) => (
                             <RecipeCard
                                 key={recipe.documentId}
                                 recipe={recipe}
