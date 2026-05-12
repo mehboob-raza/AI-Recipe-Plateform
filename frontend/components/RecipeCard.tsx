@@ -12,7 +12,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
-export default function RecipeCard({ recipe, variant = "default" } : any) {
+export default function RecipeCard({ recipe, variant = "default" }: any) {
     // Handle different recipe data structures
     const getRecipeData = () => {
         // For MealDB recipes (category/cuisine pages)
@@ -67,7 +67,7 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
     // Variant: grid (for category/cuisine pages with images)
     if (variant === "grid") {
         return (
-            <Link href={data.href}>
+            data?.href ? <Link href={data.href}>
                 <Card className="rounded-none overflow-hidden border-stone-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group pt-0">
                     {/* Image */}
                     {data.showImage ? (
@@ -104,7 +104,7 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
                         </CardTitle>
                     </CardHeader>
                 </Card>
-            </Link>
+            </Link> : null
         );
     }
 
@@ -221,7 +221,7 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
                                 You&apos;ll need:
                             </h4>
                             <div className="flex flex-wrap gap-2">
-                                {data?.missingIngredients?.map((ingredient : any, i : any) => (
+                                {data?.missingIngredients?.map((ingredient: any, i: any) => (
                                     <Badge
                                         key={i}
                                         variant="outline"
@@ -236,12 +236,14 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
                 </CardContent>
 
                 <CardFooter>
-                    <Link href={data?.href} className="w-full">
-                        <Button className="w-full bg-green-600 hover:bg-green-700 text-white gap-2">
-                            <ChefHat className="w-4 h-4" />
-                            View Full Recipe
-                        </Button>
-                    </Link>
+                    {data?.href && (
+                        <Link href={data.href} className="w-full">
+                            <Button className="w-full bg-green-600 hover:bg-green-700 text-white gap-2">
+                                <ChefHat className="w-4 h-4" />
+                                View Full Recipe
+                            </Button>
+                        </Link>
+                    )}
                 </CardFooter>
             </Card>
         );
@@ -250,7 +252,7 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
     // Variant: list (for saved recipes, search results)
     if (variant === "list") {
         return (
-            <Link href={data?.href}>
+            data?.href ? (<Link href={data?.href}>
                 <Card className="rounded-none border-stone-200 hover:shadow-lg hover:border-orange-200 transition-all cursor-pointer group overflow-hidden py-0">
                     <div className="flex flex-col md:flex-row">
                         {/* Image (if available) */}
@@ -330,12 +332,13 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
                     </div>
                 </Card>
             </Link>
+            ) : null
         );
     }
 
     // Default variant (fallback)
     return (
-        <Link href={data.href}>
+        data?.href ? <Link href={data.href}>
             <Card className="rounded-none border-stone-200 hover:shadow-lg transition-all cursor-pointer overflow-hidden py-0">
                 {data.showImage && (
                     <div className="relative aspect-video">
@@ -357,6 +360,6 @@ export default function RecipeCard({ recipe, variant = "default" } : any) {
                     )}
                 </CardHeader>
             </Card>
-        </Link>
+        </Link> : null
     );
 }
