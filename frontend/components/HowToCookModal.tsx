@@ -17,10 +17,10 @@ import { toast } from "sonner";
 
 export default function HowToCookModal() {
     const router = useRouter();
-    const [recipeName, setRecipeName] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
+    const [recipeName, setRecipeName] = useState<string>("");
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e : any) => {
         e.preventDefault();
 
         if (!recipeName.trim()) {
@@ -32,7 +32,7 @@ export default function HowToCookModal() {
         handleOpenChange(false);
     };
 
-    const handleOpenChange = (open) => {
+    const handleOpenChange = (open : boolean) => {
         setIsOpen(open);
         if (!open) {
             setRecipeName(""); // Reset input when closing
