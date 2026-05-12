@@ -27,8 +27,8 @@ import AddToPantryModal from "@/components/AddToPantryModal";
 import PricingModal from "@/components/PricingModal";
 
 export default function PantryPage() {
-    const [items, setItems] = useState([]);
-    const [editingId, setEditingId] = useState(null);
+    const [items, setItems] = useState<any>([]);
+    const [editingId, setEditingId] = useState<any>(null);
     const [editValues, setEditValues] = useState({ name: "", quantity: "" });
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -61,7 +61,7 @@ export default function PantryPage() {
     // Update items when data arrives
     useEffect(() => {
         if (itemsData?.success) {
-            setItems(itemsData.items);
+            setItems(itemsData?.items);
         }
     }, [itemsData]);
 
