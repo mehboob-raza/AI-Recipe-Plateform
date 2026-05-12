@@ -38,9 +38,9 @@ function RecipeContent() {
     const router = useRouter();
     const recipeName = searchParams.get("cook");
 
-    const [recipe, setRecipe] = useState(null);
-    const [recipeId, setRecipeId] = useState(null);
-    const [isSaved, setIsSaved] = useState(false);
+    const [recipe, setRecipe] = useState<any>(null);
+    const [recipeId, setRecipeId] = useState<any>(null);
+    const [isSaved, setIsSaved] = useState<boolean>(false);
 
     // Get or generate recipe
     const {
@@ -76,7 +76,7 @@ function RecipeContent() {
     useEffect(() => {
         if (recipeData?.success) {
             setRecipe(recipeData.recipe);
-            setRecipeId(recipeData.recipeId);
+            setRecipeId(recipeData?.recipeId);
             setIsSaved(recipeData.isSaved);
 
             if (recipeData.fromDatabase) {
@@ -348,19 +348,19 @@ function RecipeContent() {
 
                             {/* Group by category */}
                             {Object.entries(
-                                recipe.ingredients.reduce((acc, ing) => {
+                                recipe?.ingredients?.reduce((acc:any, ing:any) => {
                                     const cat = ing.category || "Other";
                                     if (!acc[cat]) acc[cat] = [];
                                     acc[cat].push(ing);
                                     return acc;
                                 }, {})
-                            ).map(([category, items]) => (
+                            ).map(([category, items] : any) => (
                                 <div key={category} className="mb-6 last:mb-0">
                                     <h3 className="text-sm font-bold text-stone-500 uppercase tracking-wide mb-3">
                                         {category}
                                     </h3>
                                     <ul className="space-y-2">
-                                        {items.map((ingredient, i) => (
+                                        {items?.map((ingredient : any, i : any) => (
                                             <li
                                                 key={i}
                                                 className="flex justify-between items-start gap-2 text-stone-700 py-2 border-b border-stone-100 last:border-0"
@@ -380,7 +380,7 @@ function RecipeContent() {
                                 <div className="mt-6 pt-6 border-t-2 border-stone-200">
                                     <h3 className="font-bold text-stone-900 mb-3 uppercase tracking-wide text-sm flex items-center gap-2">
                                         Nutrition (per serving)
-                                        {!recipeData.isPro && (
+                                        {!recipeData?.isPro && (
                                             <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-semibold">
                                                 PRO
                                             </span>
@@ -388,7 +388,7 @@ function RecipeContent() {
                                     </h3>
 
                                     <ProLockedSection
-                                        isPro={recipeData.isPro}
+                                        isPro={recipeData?.isPro}
                                         lockText="Nutrition info is Pro-only"
                                     >
                                         <div className="grid grid-cols-2 gap-3">
@@ -443,7 +443,7 @@ function RecipeContent() {
                             </h2>
 
                             <div>
-                                {recipe.instructions.map((step, index) => (
+                                {recipe?.instructions?.map((step : any, index  :any) => (
                                     <div
                                         key={step.step}
                                         className={`relative pl-12 pb-8 ${index !== recipe.instructions.length - 1
@@ -464,7 +464,7 @@ function RecipeContent() {
                                             <p className="text-stone-700 font-light mb-3">
                                                 {step.instruction}
                                             </p>
-                                            {step.tip && (
+                                            {step?.tip && (
                                                 <div className="bg-orange-50 border-l-4 border-orange-600 p-4">
                                                     <p className="text-sm text-orange-900 flex items-start gap-2">
                                                         <Lightbulb className="w-4 h-4 mt-0.5 flex-shrink-0 fill-orange-600" />
@@ -498,12 +498,12 @@ function RecipeContent() {
                         </div>
 
                         {/* General Tips */}
-                        {recipe.tips && recipe.tips.length > 0 && (
+                        {recipe?.tips && recipe?.tips?.length > 0 && (
                             <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-8 border-2 border-orange-200">
                                 <h2 className="text-2xl font-bold text-stone-900 mb-4 flex items-center gap-2">
                                     <Lightbulb className="w-6 h-6 text-orange-600 fill-orange-600" />
                                     Chef&apos;s Tips & Tricks
-                                    {!recipeData.isPro && (
+                                    {!recipeData?.isPro && (
                                         <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-semibold">
                                             PRO
                                         </span>
@@ -511,12 +511,12 @@ function RecipeContent() {
                                 </h2>
 
                                 <ProLockedSection
-                                    isPro={recipeData.isPro}
+                                    isPro={recipeData?.isPro}
                                     lockText="Chef tips are Pro-only"
                                     ctaText="Unlock Pro Tips →"
                                 >
                                     <ul className="space-y-3">
-                                        {recipe.tips.map((tip, i) => (
+                                        {recipe?.tips?.map((tip:any, i:any) => (
                                             <li
                                                 key={i}
                                                 className="flex items-start gap-3 text-stone-700"
@@ -531,11 +531,11 @@ function RecipeContent() {
                         )}
 
                         {/* Substitutions */}
-                        {recipe.substitutions && recipe.substitutions.length > 0 && (
+                        {recipe?.substitutions && recipe?.substitutions?.length > 0 && (
                             <div className="bg-white p-8 border-2 border-stone-200">
                                 <h2 className="text-2xl font-bold text-stone-900 mb-4 flex items-center gap-2">
                                     Ingredient Substitutions
-                                    {!recipeData.isPro && (
+                                    {!recipeData?.isPro && (
                                         <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-semibold">
                                             PRO
                                         </span>
@@ -548,11 +548,11 @@ function RecipeContent() {
                                 </p>
 
                                 <ProLockedSection
-                                    isPro={recipeData.isPro}
+                                    isPro={recipeData?.isPro}
                                     lockText="Substitutions are Pro-only"
                                 >
                                     <div className="space-y-4">
-                                        {recipe.substitutions.map((sub, i) => (
+                                        {recipe?.substitutions?.map((sub:any, i:any) => (
                                             <div
                                                 key={i}
                                                 className="border-b-2 border-stone-100 pb-4 last:border-0 last:pb-0"
@@ -565,7 +565,7 @@ function RecipeContent() {
                                                     :
                                                 </h3>
                                                 <div className="flex flex-wrap gap-2">
-                                                    {sub.alternatives.map((alt, j) => (
+                                                    {sub?.alternatives?.map((alt:any, j:any) => (
                                                         <Badge
                                                             key={j}
                                                             variant="outline"
