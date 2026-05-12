@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { RingLoader } from "react-spinners";
 
-export default function ImageUploader({ onImageSelect, loading }) {
-    const [preview, setPreview] = useState(null);
-    const fileInputRef = useRef(null);
+export default function ImageUploader({ onImageSelect, loading } : any) {
+    const [preview, setPreview] = useState<any>(null);
+    const fileInputRef = useRef<any>(null);
 
     const onDrop = useCallback(
-        (acceptedFiles) => {
+        (acceptedFiles : any) => {
             const file = acceptedFiles[0];
             if (!file) return;
 
@@ -40,7 +40,7 @@ export default function ImageUploader({ onImageSelect, loading }) {
         noKeyboard: true,
     });
 
-    const handleFileInputChange = (e) => {
+    const handleFileInputChange = (e :any) => {
         const file = e.target.files?.[0];
         if (file) {
             onDrop([file]);

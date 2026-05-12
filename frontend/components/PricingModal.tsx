@@ -12,7 +12,7 @@ import {
 import PricingSection from './PricingSection'
 
 
-const PricingModal = ({ subscriptionTier = 'free', children }) => {
+const PricingModal = ({ subscriptionTier = 'free', children } : any) => {
   console.log('children', children);
 
   const [isOpen, setIsOpen] = useState(false)

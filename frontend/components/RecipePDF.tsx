@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export function RecipePDF({ recipe }) {
+export function RecipePDF({ recipe } : any) {
     return (
         <Document>
             <Page size="A4" style={styles.page}>
@@ -46,7 +46,7 @@ export function RecipePDF({ recipe }) {
                 {/* Ingredients */}
                 <View style={styles.section}>
                     <Text style={styles.heading}>Ingredients</Text>
-                    {recipe.ingredients.map((ing, i) => (
+                    {recipe?.ingredients?.map((ing :any, i:any) => (
                         <Text key={i} style={styles.text}>
                             • {ing.item} – {ing.amount}
                         </Text>
@@ -56,7 +56,7 @@ export function RecipePDF({ recipe }) {
                 {/* Instructions */}
                 <View style={styles.section}>
                     <Text style={styles.heading}>Instructions</Text>
-                    {recipe.instructions.map((step) => (
+                    {recipe?.instructions?.map((step : any) => (
                         <View key={step.step} style={{ marginBottom: 6 }}>
                             <Text>
                                 {step.step}. {step.title}
@@ -67,10 +67,10 @@ export function RecipePDF({ recipe }) {
                 </View>
 
                 {/* Tips */}
-                {recipe.tips?.length > 0 && (
+                {recipe?.tips?.length > 0 && (
                     <View style={styles.section}>
                         <Text style={styles.heading}>Chef’s Tips</Text>
-                        {recipe.tips.map((tip, i) => (
+                        {recipe?.tips?.map((tip : any, i : any) => (
                             <Text key={i}>• {tip}</Text>
                         ))}
                     </View>

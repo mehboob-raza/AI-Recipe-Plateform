@@ -12,7 +12,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
-export default function RecipeCard({ recipe, variant = "default" }) {
+export default function RecipeCard({ recipe, variant = "default" } : any) {
     // Handle different recipe data structures
     const getRecipeData = () => {
         // For MealDB recipes (category/cuisine pages)
@@ -63,7 +63,6 @@ export default function RecipeCard({ recipe, variant = "default" }) {
     };
 
     const data = getRecipeData();
-    console.log('data', data);
 
     // Variant: grid (for category/cuisine pages with images)
     if (variant === "grid") {
@@ -216,13 +215,13 @@ export default function RecipeCard({ recipe, variant = "default" }) {
                     )}
 
                     {/* Missing Ingredients */}
-                    {data.missingIngredients && data.missingIngredients.length > 0 && (
+                    {data?.missingIngredients && data?.missingIngredients?.length > 0 && (
                         <div className="p-4 bg-orange-50 border border-orange-100">
                             <h4 className="text-sm font-semibold text-orange-900 mb-2">
                                 You&apos;ll need:
                             </h4>
                             <div className="flex flex-wrap gap-2">
-                                {data.missingIngredients.map((ingredient, i) => (
+                                {data?.missingIngredients?.map((ingredient : any, i : any) => (
                                     <Badge
                                         key={i}
                                         variant="outline"
@@ -237,7 +236,7 @@ export default function RecipeCard({ recipe, variant = "default" }) {
                 </CardContent>
 
                 <CardFooter>
-                    <Link href={data.href} className="w-full">
+                    <Link href={data?.href} className="w-full">
                         <Button className="w-full bg-green-600 hover:bg-green-700 text-white gap-2">
                             <ChefHat className="w-4 h-4" />
                             View Full Recipe
@@ -251,11 +250,11 @@ export default function RecipeCard({ recipe, variant = "default" }) {
     // Variant: list (for saved recipes, search results)
     if (variant === "list") {
         return (
-            <Link href={data.href}>
+            <Link href={data?.href}>
                 <Card className="rounded-none border-stone-200 hover:shadow-lg hover:border-orange-200 transition-all cursor-pointer group overflow-hidden py-0">
                     <div className="flex flex-col md:flex-row">
                         {/* Image (if available) */}
-                        {data.showImage ? (
+                        {data?.showImage ? (
                             <div className="relative w-full md:w-48 aspect-video md:aspect-square flex-shrink-0">
                                 <Image
                                     src={data.image}

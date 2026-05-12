@@ -22,10 +22,10 @@ import {
 } from "@/actions/pantry.actions";
 import { toast } from "sonner";
 
-export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
-    const [activeTab, setActiveTab] = useState("scan");
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [scannedIngredients, setScannedIngredients] = useState([]);
+export default function AddToPantryModal({ isOpen, onClose, onSuccess } : any) {
+    const [activeTab, setActiveTab] = useState<any>("scan");
+    const [selectedImage, setSelectedImage] = useState<any>(null);
+    const [scannedIngredients, setScannedIngredients] = useState<any>([]);
     const [manualItem, setManualItem] = useState({ name: "", quantity: "" });
 
     // Scan image
@@ -66,7 +66,7 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
     // Update scanned ingredients when scan completes
     useEffect(() => {
         if (scanData?.success && scanData?.ingredients) {
-            setScannedIngredients(scanData.ingredients);
+            setScannedIngredients(scanData?.ingredients);
             toast.success(`Found ${scanData.ingredients.length} ingredients!`);
         }
     }, [scanData]);
@@ -126,8 +126,8 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
     }, [addData]);
 
     // Remove scanned ingredient
-    const removeIngredient = (index) => {
-        setScannedIngredients(scannedIngredients.filter((_, i) => i !== index));
+    const removeIngredient = (index: number) => {
+        setScannedIngredients(scannedIngredients?.filter((_ : any, i : number) => i !== index));
     };
 
     return (
@@ -246,7 +246,7 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
 
                                         {/* Ingredients */}
                                         <div className="space-y-3">
-                                            {scannedIngredients.map((ingredient, index) => (
+                                            {scannedIngredients?.map((ingredient : any, index : number) => (
                                                 <div
                                                     key={index}
                                                     className="

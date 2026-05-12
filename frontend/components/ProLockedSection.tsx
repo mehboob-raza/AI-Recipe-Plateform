@@ -8,7 +8,7 @@ export default function ProLockedSection({
     lockText,
     ctaText = "Upgrade to Pro →",
     children,
-}) {
+} : any) {
     return (
         <div className="relative">
             {/* LOCKED CONTENT */}
