@@ -114,8 +114,12 @@ function getErrorMessage(error: unknown): string {
     return error instanceof Error ? error.message : String(error);
 }
 
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY ?? "");
 
+if (!GEMINI_API_KEY) {
+    throw new Error("GEMINI_API_KEY is missing");
+}
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 // Helper function to normalize recipe title
 function normalizeTitle(title: string): string {
     return title
